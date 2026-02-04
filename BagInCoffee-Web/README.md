@@ -34,14 +34,27 @@
 <!-- ABOUT -->
 ## 프로젝트 소개
 
-<img src="docs/screenshot.png" alt="Screenshot" width="600">
-
 **BagInCoffee**는 커피 애호가들이 경험을 공유하고 소통하는 소셜 플랫폼입니다.
 
 - 📱 **소셜 피드** — 게시물, 좋아요, 실시간 알림
 - 💬 **중첩 댓글** — 2단계 계층 구조, 댓글 좋아요
 - 🛒 **중고 거래** — 장비 마켓플레이스
 - 📚 **매거진** — 커피 가이드, 에디터 큐레이션
+
+### 📸 스크린샷
+
+<div align="center">
+  <img src="docs/images/screenshot-feed.jpg" alt="피드" width="45%">
+  <img src="docs/images/screenshot-guide.png" alt="가이드" width="45%">
+</div>
+<div align="center">
+  <img src="docs/images/screenshot-brands.png" alt="브랜드" width="45%">
+  <img src="docs/images/screenshot-marketplace.png" alt="마켓플레이스" width="45%">
+</div>
+<div align="center">
+  <img src="docs/images/screenshot-magazine.jpg" alt="매거진" width="45%">
+  <img src="docs/images/screenshot-login.png" alt="로그인" width="45%">
+</div>
 
 ### 기술 스택
 

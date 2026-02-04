@@ -3,6 +3,76 @@
 	import { guideApi } from '$lib/api';
 	import type { CoffeeGuide, GuideCategory } from '$lib/types/content';
 
+	// 포트폴리오용 목업 데이터
+	const MOCK_GUIDES: CoffeeGuide[] = [
+		{
+			id: '1',
+			title: '에스프레소 추출의 기초: 완벽한 샷을 위한 가이드',
+			content: '에스프레소는 커피의 정수입니다. 올바른 그라인딩, 탬핑, 추출 시간을 통해 완벽한 샷을 만들어보세요. 이 가이드에서는 초보자도 쉽게 따라할 수 있는 단계별 에스프레소 추출 방법을 알려드립니다.',
+			category: 'brewing',
+			difficulty: 'beginner',
+			estimated_time: 8,
+			views_count: 15420,
+			thumbnail_url: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400',
+			created_at: '2025-01-15'
+		},
+		{
+			id: '2',
+			title: '핸드드립 V60 마스터하기',
+			content: 'V60는 가장 인기있는 핸드드립 도구입니다. 물줄기 조절, 뜸 들이기, 추출 속도 등 V60만의 특별한 기술을 배워보세요. 원두의 풍미를 최대한 살릴 수 있습니다.',
+			category: 'brewing',
+			difficulty: 'intermediate',
+			estimated_time: 12,
+			views_count: 8930,
+			thumbnail_url: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400',
+			created_at: '2025-01-10'
+		},
+		{
+			id: '3',
+			title: '에티오피아 예가체프 원두 완벽 가이드',
+			content: '에티오피아 예가체프는 플로럴하고 과일향이 풍부한 원두입니다. 적합한 로스팅 포인트, 추천 추출 방식, 그리고 최적의 맛을 내는 방법을 알아봅니다.',
+			category: 'beans',
+			difficulty: 'beginner',
+			estimated_time: 6,
+			views_count: 12100,
+			thumbnail_url: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400',
+			created_at: '2025-01-08'
+		},
+		{
+			id: '4',
+			title: '라떼 아트: 하트 그리기 완전 정복',
+			content: '라떼 아트의 기본인 하트 패턴부터 시작해보세요. 우유 스티밍의 기초, 적절한 온도, 붓기 기술까지 상세하게 설명합니다. 연습을 통해 아름다운 하트를 그려보세요.',
+			category: 'latte-art',
+			difficulty: 'intermediate',
+			estimated_time: 15,
+			views_count: 23500,
+			thumbnail_url: 'https://images.unsplash.com/photo-1534778101976-62847782c213?w=400',
+			created_at: '2025-01-05'
+		},
+		{
+			id: '5',
+			title: '그라인더 선택 가이드: 입문자를 위한 추천',
+			content: '좋은 커피의 시작은 그라인더입니다. 수동 그라인더와 전동 그라인더의 차이, 가격대별 추천 제품, 그리고 관리 방법까지 입문자에게 필요한 모든 정보를 담았습니다.',
+			category: 'equipment',
+			difficulty: 'beginner',
+			estimated_time: 10,
+			views_count: 18200,
+			thumbnail_url: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400',
+			created_at: '2025-01-02'
+		},
+		{
+			id: '6',
+			title: '홈 로스팅 입문: 프라이팬으로 시작하기',
+			content: '집에서도 신선한 원두를 즐길 수 있습니다. 프라이팬을 이용한 간단한 홈 로스팅 방법부터 로스팅 포인트 판별법까지, 홈 로스팅의 세계로 안내합니다.',
+			category: 'roasting',
+			difficulty: 'advanced',
+			estimated_time: 20,
+			views_count: 9870,
+			thumbnail_url: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400',
+			created_at: '2024-12-28'
+		}
+	];
+
 	let guides: CoffeeGuide[] = [];
 	let loading = true;
 	let error: string | null = null;
@@ -38,20 +108,15 @@
 		loading = true;
 		error = null;
 
-		const params: any = { page, page_size: 10 };
-		if (selectedCategory !== 'all') {
-			params.category = selectedCategory;
-		}
-
-		const response = await guideApi.getAll(params);
-
-		if (response.success && response.data) {
-			guides = response.data;
-			totalPages = response.pagination?.total_pages || 1;
+		// 포트폴리오용: 목업 데이터 사용
+		await new Promise(r => setTimeout(r, 300)); // 로딩 효과
+		
+		if (selectedCategory === 'all') {
+			guides = MOCK_GUIDES;
 		} else {
-			error = response.error?.message || '가이드를 불러오는데 실패했습니다';
+			guides = MOCK_GUIDES.filter(g => g.category === selectedCategory);
 		}
-
+		totalPages = 1;
 		loading = false;
 	}
 

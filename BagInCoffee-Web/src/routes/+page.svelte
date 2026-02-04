@@ -7,6 +7,54 @@
 	import type { PostWithAuthor } from '$lib/types/Post';
 	import type { LayoutData } from './$types';
 
+	// 포트폴리오용 목업 데이터
+	const MOCK_POSTS: PostWithAuthor[] = [
+		{
+			id: '1',
+			content: '오늘의 아침 커피 ☕\n\n에티오피아 예가체프로 V60 추출했어요. 플로럴한 향이 정말 좋네요!\n\n#홈카페 #핸드드립 #예가체프',
+			images: ['https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600'],
+			tags: ['홈카페', '핸드드립', '예가체프'],
+			likes_count: 42,
+			comments_count: 8,
+			hasLiked: false,
+			created_at: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
+			author: { id: '1', username: 'coffee_morning', full_name: '김커피', avatar_url: 'https://i.pravatar.cc/100?img=1' }
+		},
+		{
+			id: '2',
+			content: '새로 들인 라마르조코 리네아 미니! 드디어 홈카페 완성했습니다 🎉\n\n첫 샷 퀄리티가 상상 이상이에요. 크레마가 정말 예술...',
+			images: ['https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600', 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600'],
+			tags: ['라마르조코', '홈카페', '에스프레소'],
+			likes_count: 156,
+			comments_count: 23,
+			hasLiked: true,
+			created_at: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
+			author: { id: '2', username: 'barista_pro', full_name: '박바리스타', avatar_url: 'https://i.pravatar.cc/100?img=2' }
+		},
+		{
+			id: '3',
+			content: '강릉 여행 중 들른 로스터리 카페. 싱글오리진 에스프레소가 정말 인상적이었어요.\n\n원두도 한 봉지 사왔습니다 😊',
+			images: ['https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600'],
+			tags: ['강릉카페', '로스터리', '여행'],
+			likes_count: 89,
+			comments_count: 12,
+			hasLiked: false,
+			created_at: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(),
+			author: { id: '3', username: 'cafe_traveler', full_name: '이여행', avatar_url: 'https://i.pravatar.cc/100?img=3' }
+		},
+		{
+			id: '4',
+			content: '라떼아트 연습 Day 30 🎨\n\n드디어 로제타가 제대로 나오기 시작했어요! 꾸준히 하니까 되네요.',
+			images: ['https://images.unsplash.com/photo-1534778101976-62847782c213?w=600'],
+			tags: ['라떼아트', '로제타', '연습'],
+			likes_count: 234,
+			comments_count: 31,
+			hasLiked: true,
+			created_at: new Date(Date.now() - 1000 * 60 * 60 * 8).toISOString(),
+			author: { id: '4', username: 'latte_artist', full_name: '최아트', avatar_url: 'https://i.pravatar.cc/100?img=4' }
+		}
+	];
+
 	let { data } = $props<{ data: LayoutData }>();
 
 	let showSplash = $state(false);
@@ -21,14 +69,9 @@
 		loading = true;
 		error = null;
 
-		const response = await postsApi.getFeed({ page: 1, page_size: 20 });
-
-		if (response.success && response.data) {
-			posts = response.data;
-		} else {
-			error = response.error?.message || 'Failed to load posts';
-		}
-
+		// 포트폴리오용: 목업 데이터 사용
+		await new Promise(r => setTimeout(r, 300));
+		posts = MOCK_POSTS;
 		loading = false;
 	}
 

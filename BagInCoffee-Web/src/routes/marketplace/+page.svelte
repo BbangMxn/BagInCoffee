@@ -3,6 +3,76 @@
 	import { marketplaceApi } from '$lib/api';
 	import type { MarketplaceItemWithSeller } from '$lib/types/marketplace';
 
+	// 포트폴리오용 목업 데이터
+	const MOCK_ITEMS: MarketplaceItemWithSeller[] = [
+		{
+			id: '1',
+			title: 'La Marzocco Linea Mini 화이트 (6개월 사용)',
+			description: '상태 최상, 박스 및 액세서리 모두 포함',
+			price: 4500000,
+			status: 'active',
+			images: ['https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400'],
+			location: '서울 강남구',
+			created_at: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30분 전
+			seller: { id: '1', username: 'coffee_lover', avatar_url: null }
+		},
+		{
+			id: '2',
+			title: 'Comandante C40 MK4 블랙',
+			description: '레드클릭스 포함, 거의 새것',
+			price: 280000,
+			status: 'active',
+			images: ['https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400'],
+			location: '경기 성남시',
+			created_at: new Date(Date.now() - 1000 * 60 * 60 * 3).toISOString(), // 3시간 전
+			seller: { id: '2', username: 'barista_kim', avatar_url: null }
+		},
+		{
+			id: '3',
+			title: 'Fellow Ode 그라인더 Gen 2',
+			description: '2개월 사용, SSP 버 업그레이드',
+			price: 450000,
+			status: 'reserved',
+			images: ['https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400'],
+			location: '서울 마포구',
+			created_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(), // 1일 전
+			seller: { id: '3', username: 'home_cafe', avatar_url: null }
+		},
+		{
+			id: '4',
+			title: 'Hario V60 풀세트 (드립스테이션 포함)',
+			description: '드립스테이션, 서버, 드리퍼, 필터 200장',
+			price: 85000,
+			status: 'active',
+			images: ['https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400'],
+			location: '부산 해운대구',
+			created_at: new Date(Date.now() - 1000 * 60 * 60 * 48).toISOString(), // 2일 전
+			seller: { id: '4', username: 'busan_roaster', avatar_url: null }
+		},
+		{
+			id: '5',
+			title: 'Acaia Pearl S 스케일',
+			description: '케이스 포함, 펌웨어 최신',
+			price: 180000,
+			status: 'sold',
+			images: ['https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400'],
+			location: '서울 송파구',
+			created_at: new Date(Date.now() - 1000 * 60 * 60 * 72).toISOString(), // 3일 전
+			seller: { id: '5', username: 'precision_brew', avatar_url: null }
+		},
+		{
+			id: '6',
+			title: 'Breville 870XL 바리스타 익스프레스',
+			description: '입문용으로 좋아요, 디스케일링 완료',
+			price: 350000,
+			status: 'active',
+			images: ['https://images.unsplash.com/photo-1534778101976-62847782c213?w=400'],
+			location: '인천 연수구',
+			created_at: new Date(Date.now() - 1000 * 60 * 60 * 96).toISOString(), // 4일 전
+			seller: { id: '6', username: 'coffee_newbie', avatar_url: null }
+		}
+	];
+
 	let items: MarketplaceItemWithSeller[] = [];
 	let loading = true;
 	let error: string | null = null;
@@ -13,19 +83,15 @@
 		loading = true;
 		error = null;
 
-		const params: any = { page, page_size: 12 };
-		if (selectedStatus !== 'all') {
-			params.status = selectedStatus;
-		}
-
-		const response = await marketplaceApi.getAll(params);
-
-		if (response.success && response.data) {
-			items = response.data;
+		// 포트폴리오용: 목업 데이터 사용
+		await new Promise(r => setTimeout(r, 300));
+		
+		if (selectedStatus === 'all') {
+			items = MOCK_ITEMS;
 		} else {
-			error = response.error?.message || 'Failed to load items';
+			items = MOCK_ITEMS.filter(item => item.status === selectedStatus);
 		}
-
+		
 		loading = false;
 	}
 
