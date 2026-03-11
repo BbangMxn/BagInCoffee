@@ -1,0 +1,51 @@
+# Git
+.git
+.gitignore
+.github
+
+# Build artifacts
+target/
+**/*.rs.bk
+*.pdb
+
+# Documentation
+*.md
+!README.md
+DEPLOYMENT.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+.DS_Store?
+
+# Logs
+*.log
+build.log
+
+# Supabase
+supabase/.branches
+supabase/.temp
+
+# Test files
+tests/
+test_data/
+
+# CI/CD (except what Railway needs)
+.gitlab-ci.yml
+.travis.yml
+
+# Docker
+docker-compose.yml
+Dockerfile.dev
+
+# Environment (keep .env for Railway)
+.env.local
+.env.*.local
+railway.env

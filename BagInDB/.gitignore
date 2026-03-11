@@ -1,0 +1,31 @@
+# Rust
+/target/
+**/*.rs.bk
+*.pdb
+Cargo.lock
+
+# Build artifacts
+build.log
+*.log
+
+# Environment
+.env
+.env.local
+.env.production
+railway.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*~
+*.tmp
+*.bak
